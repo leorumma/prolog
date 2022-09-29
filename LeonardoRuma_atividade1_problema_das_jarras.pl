@@ -1,4 +1,4 @@
-objetivo((_, 2)).
+objetivo((2, _)).
 
 capacidade((4,3)).
 
