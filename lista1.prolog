@@ -121,3 +121,40 @@ subtract([H|T1], L2, L3) :-
 subtract([H|T1], L2, [H|T3]) :-
     \+ member(H, L2),
     subtract(T1, L2, T3).
+
+/*
+7.
+*/
+
+% Caso base: Se ambas as listas estiverem vazias, a união é uma lista vazia.
+union([], [], []).
+
+% Caso em que a primeira lista está vazia, a união é a segunda lista.
+union([], L2, L2).
+
+% Caso em que a segunda lista está vazia, a união é a primeira lista.
+union(L1, [], L1).
+
+% Caso em que a cabeça da primeira lista já está na segunda lista, removemos a cabeça da primeira lista e continuamos a união.
+union([H|T1], L2, L3) :-
+    member(H, L2),
+    union(T1, L2, L3).
+
+% Caso em que a cabeça da primeira lista não está na segunda lista, incluímos a cabeça em L3 e continuamos a união.
+union([H|T1], L2, [H|T3]) :-
+    \+ member(H, L2),
+    union(T1, L2, T3).
+
+/*
+8
+*/
+
+intersecao([], _, []).
+
+intersecao([H1|T1], L2, [H1|L3]) :-
+    member(H1, L2),
+    intersecao(T1, L2, L3).
+
+intersecao([H1|T1], L2, L3) :-
+    \+ member(H1, L2),
+    intersecao(T1, L2, L3).
