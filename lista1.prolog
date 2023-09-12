@@ -60,3 +60,64 @@ multiplo_de_3(X) :-
 % Para encontrar todos os múltiplos de 3 menores ou iguais a 20:
 % ?- multiplo_de_3(20).
 
+/*
+4. Para inserir um dado n ́umero em uma lista ordenada (crescente). Utilize um predicado com trˆes ar-
+gumentos: o primeiro  ́e o n ́umero a ser inserido, o segundo a lista ordenada e o terceiro a nova lista obtida.
+*/
+
+% Caso base: inserir um número em uma lista vazia resulta na lista contendo apenas esse número.
+inserir_ordenado(N, [], [N]).
+
+% Caso 1: Inserir o número no início da lista (se for menor ou igual ao primeiro elemento).
+inserir_ordenado(N, [H|T], [N, H|T]) :-
+    N =< H.
+
+% Caso 2: O número a ser inserido é maior que o primeiro elemento da lista.
+% Recursivamente insira o número na cauda da lista.
+inserir_ordenado(N, [H|T], [H|ListaRestante]) :-
+    N > H,
+    inserir_ordenado(N, T, ListaRestante).
+
+
+
+/*
+5. Dadas duas listas ordenadas L1 e L2, retorne a lista L3 que  ́e a uni ̃ao ordenada de L1 e L2.
+
+Entrada: ?- uniao_ordenada([1,3,5,7,9], [2,4,6,8,10,11,12,13,14,15], L3).
+L1 = [1, 3, 5, 7, 9],
+L2 = [2, 4, 6, 8, 10, 11, 12, 13, 14, 15].
+
+Saida:
+L3 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].
+
+*/
+
+uniao_ordenada([], L2, L2).
+
+uniao_ordenada(L1, [], L1).
+
+uniao_ordenada([H1|T1], [H2|T2], [H1|L3]) :-
+    H1 =< H2,
+    uniao_ordenada(T1, [H2|T2], L3).
+
+uniao_ordenada([H1|T1], [H2|T2], [H2|L3]) :-
+    H1 > H2,
+    uniao_ordenada([H1|T1], T2, L3).
+
+
+/*
+6. Dadas duas listas L1 e L2, retorne a lista L3 que cont ́em todos os elementos de L1 que n ̃ao est ̃ao em L2.
+*/
+
+% Caso base: se a lista L1 estiver vazia, não há nada a subtrair.
+subtract([], _, []).
+
+% Caso em que a cabeça de L1 está em L2, não a incluímos em L3.
+subtract([H|T1], L2, L3) :-
+    member(H, L2),
+    subtract(T1, L2, L3).
+
+% Caso em que a cabeça de L1 não está em L2, a incluímos em L3.
+subtract([H|T1], L2, [H|T3]) :-
+    \+ member(H, L2),
+    subtract(T1, L2, T3).
