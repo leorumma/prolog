@@ -158,3 +158,16 @@ intersecao([H1|T1], L2, [H1|L3]) :-
 intersecao([H1|T1], L2, L3) :-
     \+ member(H1, L2),
     intersecao(T1, L2, L3).
+
+/*
+9
+*/
+listaParaConjunto([], []).
+
+listaParaConjunto([H1|T1], L2) :-
+    member(H1, T1),
+    listaParaConjunto(T1, L2).
+
+listaParaConjunto([H1|T1], [H1|L2]) :-
+    \+ member(H1, T1),
+    listaParaConjunto(T1, L2).
