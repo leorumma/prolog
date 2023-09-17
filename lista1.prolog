@@ -171,3 +171,36 @@ listaParaConjunto([H1|T1], L2) :-
 listaParaConjunto([H1|T1], [H1|L2]) :-
     \+ member(H1, T1),
     listaParaConjunto(T1, L2).
+
+
+/*
+10
+*/
+
+is_ordenada(L) :-
+    is_ordenada_crescente(L),
+    !.
+
+is_ordenada(L) :-
+    is_ordenada_decrescente(L).
+
+is_ordenada_crescente([]).
+
+is_ordenada_crescente([_]).
+
+is_ordenada_crescente([H1, H2|T1]) :-
+    H1 =< H2,
+    is_ordenada_crescente([H2|T1]).
+
+is_ordenada_decrescente([]).
+
+is_ordenada_decrescente([_]).
+
+is_ordenada_decrescente([H1, H2|T1]) :-
+    H1 >= H2,
+    is_ordenada_decrescente([H2|T1]).
+
+/*
+11
+*/
+
