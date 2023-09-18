@@ -204,3 +204,13 @@ is_ordenada_decrescente([H1, H2|T1]) :-
 11
 */
 
+unificavel([], _, []).
+
+unificavel([H|T], Termo, [H|L2]) :-
+    \+ H == Termo
+    !,
+    unificavel(T, Termo, L2).
+
+unificavel([_|T], Termo, L2) :-
+
+    unificavel(T, Termo, L2).
