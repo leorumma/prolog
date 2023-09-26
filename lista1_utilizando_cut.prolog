@@ -96,21 +96,22 @@ adicionar_elemento_lista_ordenada(N, [H|T], [H|ListaResultante]):-
 
 /*
 *5. Dadas duas listas ordenadas L1 e L2, retorne a lista L3 que é a união ordenada de L1 e L2.
-* 
-*
+* Entrada: uniao_lista_ordenada([1,3,5,7,9], [2,4,6,8,10,11,12,13,14,15], L3).
+* Saida: L3 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].
 */
 
-uniao_lista_ordenada(_, [], []).
+uniao_lista_ordenada([], L2, L2).
 
-uniao_lista_ordenada([], _, []).
+uniao_lista_ordenada(L1, [], L1).
 
-uniao_lista_ordenada([H1|T1], [H2|T2], [H1|ListaResultante]):- 
+uniao_lista_ordenada([H1|T1], [H2|T2], [H1|L3]) :- 
     H1 =< H2,
     !,
-    uniao_lista_ordenada(T1, [H2|T2], ListaResultante).
+    uniao_lista_ordenada(T1, [H2|T2], L3).
 
-uniao_lista_ordenada([H1|T1], [H2|T2], [H2|ListaResultante]):- 
-    uniao_lista_ordenada([H1|T1], T2, ListaRestante).
+uniao_lista_ordenada([H1|T1], [H2|T2], [H2|L3]) :- 
+    uniao_lista_ordenada([H1|T1], T2, L3).
+
 
 
 /*
